@@ -1,5 +1,5 @@
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
 } from "react-router";
@@ -14,29 +14,23 @@ import AdminRoute from "./components/AdminRoute";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
 
       <Routes>
 
         <Route
           path="/"
-          element={
-            <LoginPage />
-          }
+          element={<LoginPage />}
         />
 
         <Route
           path="/cliente"
-          element={
-            <ClientePage />
-          }
+          element={<ClientePage />}
         />
 
         <Route
           path="/buscar"
-          element={
-            <BuscarMusicaPage />
-          }
+          element={<BuscarMusicaPage />}
         />
 
         <Route
@@ -50,13 +44,11 @@ export default function App() {
 
         <Route
           path="/tv"
-          element={
-            <TvPage />
-          }
+          element={<TvPage />}
         />
 
       </Routes>
 
-    </BrowserRouter>
+    </HashRouter>
   );
 }
