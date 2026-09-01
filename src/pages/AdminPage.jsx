@@ -7,23 +7,14 @@ export default function AdminPage() {
   const navigate = useNavigate();
 
   const [painel, setPainel] = useState(null);
-
   const [fotos, setFotos] = useState([]);
 
-  const [carregando, setCarregando] =
-    useState(true);
+  const [carregando, setCarregando] = useState(true);
+  const [processando, setProcessando] = useState(false);
+  const [processandoFoto, setProcessandoFoto] = useState(null);
 
-  const [processando, setProcessando] =
-    useState(false);
-
-  const [processandoFoto, setProcessandoFoto] =
-    useState(null);
-
-  const [erro, setErro] =
-    useState("");
-
-  const [mensagem, setMensagem] =
-    useState("");
+  const [erro, setErro] = useState("");
+  const [mensagem, setMensagem] = useState("");
 
   // ======================================================
   // CARREGAR PAINEL
@@ -31,14 +22,12 @@ export default function AdminPage() {
 
   async function carregarPainel() {
     try {
-      const { data, error } =
-        await supabase.rpc(
-          "painel_anfitriao",
-          {
-            p_sala_codigo:
-              "NARGUILEAJU",
-          }
-        );
+      const { data, error } = await supabase.rpc(
+        "painel_anfitriao",
+        {
+          p_sala_codigo: "NARGUILEAJU",
+        }
+      );
 
       if (error) {
         throw error;
@@ -52,7 +41,6 @@ export default function AdminPage() {
       }
 
       setPainel(data);
-
     } catch (error) {
       console.error(
         "Erro ao carregar painel:",
@@ -72,14 +60,12 @@ export default function AdminPage() {
 
   async function carregarFotos() {
     try {
-      const { data, error } =
-        await supabase.rpc(
-          "fotos_pendentes",
-          {
-            p_sala_codigo:
-              "NARGUILEAJU",
-          }
-        );
+      const { data, error } = await supabase.rpc(
+        "fotos_pendentes",
+        {
+          p_sala_codigo: "NARGUILEAJU",
+        }
+      );
 
       if (error) {
         throw error;
@@ -92,10 +78,7 @@ export default function AdminPage() {
         );
       }
 
-      setFotos(
-        data?.fotos || []
-      );
-
+      setFotos(data?.fotos || []);
     } catch (error) {
       console.error(
         "Erro ao carregar fotos:",
@@ -122,7 +105,6 @@ export default function AdminPage() {
       ]);
 
       setErro("");
-
     } finally {
       setCarregando(false);
     }
@@ -136,9 +118,7 @@ export default function AdminPage() {
     carregarTudo();
 
     const canal = supabase
-      .channel(
-        "admin-narguileaju"
-      )
+      .channel("admin-narguileaju")
 
       // FILA
       .on(
@@ -159,8 +139,7 @@ export default function AdminPage() {
         {
           event: "*",
           schema: "public",
-          table:
-            "configuracoes_sala",
+          table: "configuracoes_sala",
         },
         () => {
           carregarPainel();
@@ -183,9 +162,7 @@ export default function AdminPage() {
       .subscribe();
 
     return () => {
-      supabase.removeChannel(
-        canal
-      );
+      supabase.removeChannel(canal);
     };
   }, []);
 
@@ -206,11 +183,10 @@ export default function AdminPage() {
     setMensagem("");
 
     try {
-      const { data, error } =
-        await supabase.rpc(
-          funcao,
-          parametros
-        );
+      const { data, error } = await supabase.rpc(
+        funcao,
+        parametros
+      );
 
       if (error) {
         throw error;
@@ -229,7 +205,6 @@ export default function AdminPage() {
       );
 
       await carregarPainel();
-
     } catch (error) {
       console.error(
         "Erro ao executar ação:",
@@ -240,7 +215,6 @@ export default function AdminPage() {
         error.message ||
           "Não foi possível realizar a operação."
       );
-
     } finally {
       setProcessando(false);
     }
@@ -250,17 +224,12 @@ export default function AdminPage() {
   // ALTERAR LIMITE
   // ======================================================
 
-  function alterarLimite(
-    limite
-  ) {
+  function alterarLimite(limite) {
     executarAcao(
       "alterar_limite_sala",
       {
-        p_sala_codigo:
-          "NARGUILEAJU",
-
-        p_limite:
-          limite,
+        p_sala_codigo: "NARGUILEAJU",
+        p_limite: limite,
       }
     );
   }
@@ -269,17 +238,12 @@ export default function AdminPage() {
   // TOCAR
   // ======================================================
 
-  function tocarMusica(
-    id
-  ) {
+  function tocarMusica(id) {
     executarAcao(
       "tocar_musica",
       {
-        p_sala_codigo:
-          "NARGUILEAJU",
-
-        p_musica_id:
-          id,
+        p_sala_codigo: "NARGUILEAJU",
+        p_musica_id: id,
       }
     );
   }
@@ -292,8 +256,7 @@ export default function AdminPage() {
     executarAcao(
       "proxima_musica",
       {
-        p_sala_codigo:
-          "NARGUILEAJU",
+        p_sala_codigo: "NARGUILEAJU",
       }
     );
   }
@@ -302,13 +265,10 @@ export default function AdminPage() {
   // REMOVER MÚSICA
   // ======================================================
 
-  function removerMusica(
-    id
-  ) {
-    const confirmar =
-      window.confirm(
-        "Remover esta música da fila?"
-      );
+  function removerMusica(id) {
+    const confirmar = window.confirm(
+      "Remover esta música da fila?"
+    );
 
     if (!confirmar) {
       return;
@@ -317,11 +277,8 @@ export default function AdminPage() {
     executarAcao(
       "remover_musica_fila",
       {
-        p_sala_codigo:
-          "NARGUILEAJU",
-
-        p_musica_id:
-          id,
+        p_sala_codigo: "NARGUILEAJU",
+        p_musica_id: id,
       }
     );
   }
@@ -339,37 +296,28 @@ export default function AdminPage() {
     }
 
     const texto =
-      novoStatus ===
-      "aprovada"
+      novoStatus === "aprovada"
         ? "Aprovar esta foto para aparecer na TV?"
         : "Rejeitar esta foto?";
 
-    const confirmar =
-      window.confirm(texto);
+    const confirmar = window.confirm(texto);
 
     if (!confirmar) {
       return;
     }
 
-    setProcessandoFoto(
-      fotoId
-    );
-
+    setProcessandoFoto(fotoId);
     setErro("");
     setMensagem("");
 
     try {
-      const { data, error } =
-        await supabase.rpc(
-          "alterar_status_foto",
-          {
-            p_foto_id:
-              fotoId,
-
-            p_status:
-              novoStatus,
-          }
-        );
+      const { data, error } = await supabase.rpc(
+        "alterar_status_foto",
+        {
+          p_foto_id: fotoId,
+          p_status: novoStatus,
+        }
+      );
 
       if (error) {
         throw error;
@@ -382,10 +330,7 @@ export default function AdminPage() {
         );
       }
 
-      if (
-        novoStatus ===
-        "aprovada"
-      ) {
+      if (novoStatus === "aprovada") {
         setMensagem(
           "Foto aprovada para exibição na TV."
         );
@@ -396,7 +341,6 @@ export default function AdminPage() {
       }
 
       await carregarFotos();
-
     } catch (error) {
       console.error(
         "Erro na foto:",
@@ -407,12 +351,24 @@ export default function AdminPage() {
         error.message ||
           "Não foi possível atualizar a foto."
       );
-
     } finally {
-      setProcessandoFoto(
-        null
-      );
+      setProcessandoFoto(null);
     }
+  }
+
+  // ======================================================
+  // ABRIR TELA DA TV
+  // ======================================================
+
+  function abrirTv() {
+    const urlTv =
+      `${window.location.origin}${window.location.pathname}#/tv`;
+
+    window.open(
+      urlTv,
+      "_blank",
+      "noopener,noreferrer"
+    );
   }
 
   // ======================================================
@@ -442,7 +398,6 @@ export default function AdminPage() {
       );
 
       navigate("/");
-
     } catch (error) {
       console.error(
         "Erro ao sair:",
@@ -469,11 +424,8 @@ export default function AdminPage() {
     );
   }
 
-  const tocando =
-    painel?.tocando;
-
-  const fila =
-    painel?.fila || [];
+  const tocando = painel?.tocando;
+  const fila = painel?.fila || [];
 
   // ======================================================
   // INTERFACE
@@ -482,7 +434,9 @@ export default function AdminPage() {
   return (
     <div className="admin-page">
 
-      {/* CABEÇALHO */}
+      {/* ==================================================
+          CABEÇALHO
+      ================================================== */}
 
       <header className="admin-header">
 
@@ -497,8 +451,7 @@ export default function AdminPage() {
           </h1>
 
           <p>
-            Controle da música
-            e da experiência do lounge
+            Controle da música e da experiência do lounge
           </p>
 
         </div>
@@ -506,12 +459,18 @@ export default function AdminPage() {
         <div className="admin-header-actions">
 
           <div className="lounge-status">
-
             <span></span>
-
             Lounge aberto
-
           </div>
+
+          <button
+            type="button"
+            className="admin-tv-button"
+            onClick={abrirTv}
+            title="Abrir tela da TV"
+          >
+            📺 ABRIR TV
+          </button>
 
           <button
             type="button"
@@ -528,7 +487,9 @@ export default function AdminPage() {
 
       <main className="admin-content">
 
-        {/* MENSAGENS */}
+        {/* ==================================================
+            MENSAGENS
+        ================================================== */}
 
         {erro && (
           <div className="admin-error">
@@ -542,9 +503,9 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* ================================================
+        {/* ==================================================
             LIMITE
-        ================================================ */}
+        ================================================== */}
 
         <section className="admin-card">
 
@@ -569,9 +530,8 @@ export default function AdminPage() {
           </div>
 
           <p className="limit-description">
-            Quantidade máxima de músicas
-            que cada cliente pode manter
-            simultaneamente na fila.
+            Quantidade máxima de músicas que cada
+            cliente pode manter simultaneamente na fila.
           </p>
 
           <div className="limit-buttons">
@@ -582,19 +542,14 @@ export default function AdminPage() {
                 <button
                   type="button"
                   key={numero}
-                  disabled={
-                    processando
-                  }
+                  disabled={processando}
                   className={
-                    painel?.limite ===
-                    numero
+                    painel?.limite === numero
                       ? "limit-active"
                       : ""
                   }
                   onClick={() =>
-                    alterarLimite(
-                      numero
-                    )
+                    alterarLimite(numero)
                   }
                 >
                   {numero}
@@ -609,9 +564,7 @@ export default function AdminPage() {
 
             <button
               type="button"
-              disabled={
-                processando
-              }
+              disabled={processando}
               onClick={() =>
                 alterarLimite(3)
               }
@@ -627,9 +580,7 @@ export default function AdminPage() {
 
             <button
               type="button"
-              disabled={
-                processando
-              }
+              disabled={processando}
               onClick={() =>
                 alterarLimite(1)
               }
@@ -647,9 +598,9 @@ export default function AdminPage() {
 
         </section>
 
-        {/* ================================================
+        {/* ==================================================
             TOCANDO AGORA
-        ================================================ */}
+        ================================================== */}
 
         <section className="admin-card">
 
@@ -682,9 +633,7 @@ export default function AdminPage() {
               {tocando.thumbnail_url ? (
 
                 <img
-                  src={
-                    tocando.thumbnail_url
-                  }
+                  src={tocando.thumbnail_url}
                   alt=""
                 />
 
@@ -745,18 +694,16 @@ export default function AdminPage() {
                 fila.length === 0
               )
             }
-            onClick={
-              proximaMusica
-            }
+            onClick={proximaMusica}
           >
             ⏭ PRÓXIMA MÚSICA
           </button>
 
         </section>
 
-        {/* ================================================
+        {/* ==================================================
             FILA
-        ================================================ */}
+        ================================================== */}
 
         <section className="admin-card">
 
@@ -797,16 +744,11 @@ export default function AdminPage() {
             <div className="admin-queue">
 
               {fila.map(
-                (
-                  musica,
-                  index
-                ) => (
+                (musica, index) => (
 
                   <article
                     className="admin-music"
-                    key={
-                      musica.id
-                    }
+                    key={musica.id}
                   >
 
                     <div className="queue-position">
@@ -816,9 +758,7 @@ export default function AdminPage() {
                     {musica.thumbnail_url ? (
 
                       <img
-                        src={
-                          musica.thumbnail_url
-                        }
+                        src={musica.thumbnail_url}
                         alt=""
                       />
 
@@ -858,9 +798,7 @@ export default function AdminPage() {
                       <button
                         type="button"
                         className="play-button"
-                        disabled={
-                          processando
-                        }
+                        disabled={processando}
                         onClick={() =>
                           tocarMusica(
                             musica.id
@@ -874,9 +812,7 @@ export default function AdminPage() {
                       <button
                         type="button"
                         className="remove-button"
-                        disabled={
-                          processando
-                        }
+                        disabled={processando}
                         onClick={() =>
                           removerMusica(
                             musica.id
@@ -900,9 +836,9 @@ export default function AdminPage() {
 
         </section>
 
-        {/* ================================================
+        {/* ==================================================
             FOTOS PENDENTES
-        ================================================ */}
+        ================================================== */}
 
         <section className="admin-card">
 
@@ -952,17 +888,13 @@ export default function AdminPage() {
 
                   <article
                     className="admin-photo-card"
-                    key={
-                      foto.id
-                    }
+                    key={foto.id}
                   >
 
                     <div className="admin-photo-image">
 
                       <img
-                        src={
-                          foto.arquivo_url
-                        }
+                        src={foto.arquivo_url}
                         alt="Foto enviada"
                       />
 
@@ -987,8 +919,7 @@ export default function AdminPage() {
                         type="button"
                         className="approve-photo-button"
                         disabled={
-                          processandoFoto !==
-                          null
+                          processandoFoto !== null
                         }
                         onClick={() =>
                           alterarFoto(
@@ -1007,8 +938,7 @@ export default function AdminPage() {
                         type="button"
                         className="reject-photo-button"
                         disabled={
-                          processandoFoto !==
-                          null
+                          processandoFoto !== null
                         }
                         onClick={() =>
                           alterarFoto(
