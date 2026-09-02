@@ -235,6 +235,20 @@ export default function AdminPage() {
   }
 
   // ======================================================
+  // ALTERAR DURAÇÃO MÁXIMA
+  // ======================================================
+
+  function alterarDuracaoMaxima(segundos) {
+    executarAcao(
+      "alterar_duracao_maxima_sala",
+      {
+        p_sala_codigo: "NARGUILEAJU",
+        p_duracao_maxima_segundos: segundos,
+      }
+    );
+  }
+
+  // ======================================================
   // TOCAR
   // ======================================================
 
@@ -593,6 +607,74 @@ export default function AdminPage() {
               </strong>
 
             </button>
+
+          </div>
+
+        </section>
+
+        {/* ==================================================
+            DURAÇÃO MÁXIMA
+        ================================================== */}
+
+        <section className="admin-card">
+
+          <div className="admin-card-title">
+
+            <div>
+
+              <span>
+                CONFIGURAÇÃO
+              </span>
+
+              <h2>
+                Duração máxima por música
+              </h2>
+
+            </div>
+
+            <strong className="duration-current-limit">
+              {painel?.duracao_maxima_segundos == null
+                ? "∞"
+                : `${Math.round(
+                    painel.duracao_maxima_segundos / 60
+                  )} min`}
+            </strong>
+
+          </div>
+
+          <p className="limit-description">
+            Vídeos acima do tempo definido ficam indisponíveis
+            para os clientes na busca de músicas.
+          </p>
+
+          <div className="duration-limit-buttons">
+
+            {[
+              { label: "2 min", value: 120 },
+              { label: "4 min", value: 240 },
+              { label: "6 min", value: 360 },
+              { label: "30 min", value: 1800 },
+              { label: "1 hora", value: 3600 },
+              { label: "Sem limite", value: null },
+            ].map((opcao) => (
+
+              <button
+                type="button"
+                key={opcao.label}
+                disabled={processando}
+                className={
+                  painel?.duracao_maxima_segundos === opcao.value
+                    ? "duration-limit-active"
+                    : ""
+                }
+                onClick={() =>
+                  alterarDuracaoMaxima(opcao.value)
+                }
+              >
+                {opcao.label}
+              </button>
+
+            ))}
 
           </div>
 

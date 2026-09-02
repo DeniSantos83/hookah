@@ -832,6 +832,13 @@ export default function TvPage() {
                   {tocando.artista}
                 </p>
 
+                <small className="tv-requested-by">
+                  Pedido por{" "}
+                  <strong>
+                    {tocando.nickname || "Cliente"}
+                  </strong>
+                </small>
+
                 {!playerPronto && (
                   <small className="tv-player-status">
                     Preparando
@@ -884,6 +891,13 @@ export default function TvPage() {
                   <span>
                     {proxima.artista}
                   </span>
+
+                  <small className="tv-requested-by">
+                    Escolhida por{" "}
+                    <strong>
+                      {proxima.nickname || "Cliente"}
+                    </strong>
+                  </small>
 
                 </div>
 

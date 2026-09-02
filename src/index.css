@@ -2246,3 +2246,112 @@ input:focus {
     font-size: 10px;
   }
 }
+
+/* ======================================================
+   TV - QUEM ESCOLHEU A MÚSICA
+====================================================== */
+
+.tv-requested-by {
+  display: block;
+  margin-top: 8px;
+  color: #6f655d;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.tv-requested-by strong {
+  color: #c48c42;
+  font-weight: 800;
+}
+
+/* ======================================================
+   ADMIN - DURAÇÃO MÁXIMA DAS MÚSICAS
+====================================================== */
+
+.duration-current-limit {
+  color: #e3b76d;
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+.duration-limit-buttons {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.duration-limit-buttons button {
+  min-height: 44px;
+  padding: 10px 8px;
+  border: 1px solid #39312b;
+  border-radius: 10px;
+  background: #191613;
+  color: #9c8e82;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.duration-limit-buttons button:hover:not(:disabled) {
+  border-color: #6c5134;
+  color: #d7b27a;
+}
+
+.duration-limit-buttons .duration-limit-active {
+  border-color: #c48c42;
+  background: #c48c42;
+  color: #160f09;
+  font-weight: 800;
+}
+
+.duration-limit-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ======================================================
+   BUSCA - DURAÇÃO DOS VÍDEOS
+====================================================== */
+
+.search-hint strong {
+  color: #c48c42;
+}
+
+.video-duration {
+  width: fit-content;
+  margin-top: 2px;
+  color: #b79c77;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.video-duration-blocked {
+  color: #d16f6f;
+}
+
+.youtube-result:has(.video-duration-blocked) {
+  border-color: rgba(160, 65, 65, 0.32);
+  opacity: 0.72;
+}
+
+.add-music-button:disabled {
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .duration-limit-buttons {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 420px) {
+  .duration-limit-buttons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .duration-current-limit {
+    font-size: 20px;
+  }
+}
+
