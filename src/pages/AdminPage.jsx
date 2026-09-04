@@ -16,6 +16,10 @@ export default function AdminPage() {
   const [erro, setErro] = useState("");
   const [mensagem, setMensagem] = useState("");
 
+  // Mensagem/letreiro exibido na TV
+  const [mensagemTv, setMensagemTv] = useState("");
+  const [mensagemTvAtiva, setMensagemTvAtiva] = useState(false);
+
   // ======================================================
   // CARREGAR PAINEL
   // ======================================================
@@ -41,6 +45,10 @@ export default function AdminPage() {
       }
 
       setPainel(data);
+
+      // Sincroniza o formulário do letreiro com a configuração atual.
+      setMensagemTv(data?.mensagem_tv || "");
+      setMensagemTvAtiva(Boolean(data?.mensagem_tv_ativa));
     } catch (error) {
       console.error(
         "Erro ao carregar painel:",
@@ -244,6 +252,52 @@ export default function AdminPage() {
       {
         p_sala_codigo: "NARGUILEAJU",
         p_duracao_maxima_segundos: segundos,
+      }
+    );
+  }
+
+  // ======================================================
+  // MENSAGEM / LETREIRO DA TV
+  // ======================================================
+
+  function salvarMensagemTv() {
+    const texto = mensagemTv.trim();
+
+    if (mensagemTvAtiva && !texto) {
+      setErro(
+        "Digite uma mensagem antes de ativar o letreiro."
+      );
+      return;
+    }
+
+    executarAcao(
+      "alterar_mensagem_tv",
+      {
+        p_sala_codigo: "NARGUILEAJU",
+        p_mensagem: texto || null,
+        p_ativa: mensagemTvAtiva && Boolean(texto),
+      }
+    );
+  }
+
+  function alterarStatusMensagemTv(ativa) {
+    const texto = mensagemTv.trim();
+
+    if (ativa && !texto) {
+      setErro(
+        "Digite uma mensagem antes de ativar o letreiro."
+      );
+      return;
+    }
+
+    setMensagemTvAtiva(ativa);
+
+    executarAcao(
+      "alterar_mensagem_tv",
+      {
+        p_sala_codigo: "NARGUILEAJU",
+        p_mensagem: texto || null,
+        p_ativa: ativa && Boolean(texto),
       }
     );
   }
@@ -675,6 +729,97 @@ export default function AdminPage() {
               </button>
 
             ))}
+
+          </div>
+
+        </section>
+
+        {/* ==================================================
+            MENSAGEM DO TELÃO
+        ================================================== */}
+
+        <section className="admin-card admin-tv-message-card">
+
+          <div className="admin-card-title">
+
+            <div>
+
+              <span>
+                TELÃO
+              </span>
+
+              <h2>
+                Mensagem do telão
+              </h2>
+
+            </div>
+
+            <div
+              className={
+                mensagemTvAtiva
+                  ? "tv-message-status active"
+                  : "tv-message-status"
+              }
+            >
+              <i></i>
+              {mensagemTvAtiva ? "ATIVA" : "DESATIVADA"}
+            </div>
+
+          </div>
+
+          <p className="limit-description">
+            A mensagem passa continuamente no rodapé do vídeo
+            e fica atrás do card das fotos.
+          </p>
+
+          <textarea
+            className="admin-tv-message-input"
+            value={mensagemTv}
+            maxLength={220}
+            disabled={processando}
+            placeholder="Ex.: Happy Hour até às 20h • Siga @narguileaju • Marque a gente nas suas fotos!"
+            onChange={(event) =>
+              setMensagemTv(event.target.value)
+            }
+          />
+
+          <div className="admin-tv-message-meta">
+            <span>
+              {mensagemTv.length} / 220 caracteres
+            </span>
+
+            <span>
+              A alteração aparece no telão automaticamente.
+            </span>
+          </div>
+
+          <div className="admin-tv-message-actions">
+
+            <button
+              type="button"
+              className="admin-tv-message-save"
+              disabled={processando}
+              onClick={salvarMensagemTv}
+            >
+              SALVAR MENSAGEM
+            </button>
+
+            <button
+              type="button"
+              className={
+                mensagemTvAtiva
+                  ? "admin-tv-message-toggle active"
+                  : "admin-tv-message-toggle"
+              }
+              disabled={processando}
+              onClick={() =>
+                alterarStatusMensagemTv(!mensagemTvAtiva)
+              }
+            >
+              {mensagemTvAtiva
+                ? "DESATIVAR LETREIRO"
+                : "ATIVAR LETREIRO"}
+            </button>
 
           </div>
 

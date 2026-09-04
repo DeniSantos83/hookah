@@ -118,6 +118,7 @@ export default function TvPage() {
           table: "configuracoes_sala",
         },
         () => {
+          carregarEstado();
           carregarFotosTv();
         }
       )
@@ -686,6 +687,16 @@ export default function TvPage() {
         ]
       : null;
 
+  const mensagemTv =
+    estado?.mensagem_tv?.trim() ||
+    "";
+
+  const mensagemTvAtiva =
+    Boolean(
+      estado?.mensagem_tv_ativa &&
+      mensagemTv
+    );
+
   // ======================================================
   // INTERFACE
   // ======================================================
@@ -829,6 +840,45 @@ export default function TvPage() {
           )}
 
         </section>
+
+        {/* ==================================================
+            LETREIRO DO TELÃO
+        ================================================== */}
+
+        {mensagemTvAtiva && (
+          <div
+            className="tv-ticker"
+            aria-label="Mensagem do telão"
+          >
+            <div className="tv-ticker-track">
+
+              <span className="tv-ticker-item">
+                <b>📢</b>
+                {mensagemTv}
+                <i>•</i>
+              </span>
+
+              <span
+                className="tv-ticker-item"
+                aria-hidden="true"
+              >
+                <b>📢</b>
+                {mensagemTv}
+                <i>•</i>
+              </span>
+
+              <span
+                className="tv-ticker-item"
+                aria-hidden="true"
+              >
+                <b>📢</b>
+                {mensagemTv}
+                <i>•</i>
+              </span>
+
+            </div>
+          </div>
+        )}
 
         {/* ==================================================
             FOTO DA NOITE - FLUTUANTE
