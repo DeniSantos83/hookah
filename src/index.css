@@ -2355,3 +2355,482 @@ input:focus {
   }
 }
 
+
+/* ======================================================
+   TV KIOSK / PROJETOR
+   Vídeo em tela cheia + cards flutuantes
+====================================================== */
+
+.tv-kiosk {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.tv-kiosk,
+.tv-kiosk * {
+  box-sizing: border-box;
+}
+
+.tv-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.tv-youtube-full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  overflow: hidden;
+  background: #000;
+}
+
+.tv-youtube-full .youtube-player,
+.tv-youtube-full iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
+}
+
+.tv-kiosk .tv-player-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+}
+
+/* Marca discreta no topo */
+
+.tv-floating-brand {
+  position: absolute;
+  top: clamp(12px, 2vh, 24px);
+  left: 50%;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  max-width: calc(100vw - 40px);
+  padding: 9px 14px;
+
+  border: 1px solid rgba(196, 140, 66, 0.3);
+  border-radius: 999px;
+
+  background: rgba(8, 7, 6, 0.72);
+  color: #f4e8dc;
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.32);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transform: translateX(-50%);
+
+  pointer-events: none;
+}
+
+.tv-floating-brand > span {
+  color: #d8a85f;
+  font-size: clamp(10px, 0.8vw, 13px);
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+
+.tv-floating-brand > strong {
+  color: #b9aa9d;
+  font-size: clamp(8px, 0.65vw, 10px);
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+
+.tv-floating-brand > small {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  color: #b9aa9d;
+
+  font-size: clamp(8px, 0.6vw, 9px);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.tv-floating-brand > small i {
+  width: 7px;
+  height: 7px;
+
+  display: block;
+
+  border-radius: 50%;
+
+  background: #c84646;
+
+  box-shadow: 0 0 12px rgba(200, 70, 70, 0.75);
+}
+
+/* Próxima música */
+
+.tv-floating-next {
+  position: absolute;
+  top: clamp(18px, 3vh, 32px);
+  left: clamp(18px, 2.5vw, 38px);
+  z-index: 21;
+
+  width: clamp(290px, 29vw, 470px);
+  max-width: calc(100vw - 36px);
+
+  padding: clamp(13px, 1.3vw, 19px);
+
+  border: 1px solid rgba(196, 140, 66, 0.42);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(22, 18, 15, 0.92),
+      rgba(8, 7, 6, 0.78)
+    );
+
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.48);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  pointer-events: none;
+}
+
+.tv-floating-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #d6a354;
+
+  font-size: clamp(9px, 0.7vw, 11px);
+  font-weight: 900;
+
+  letter-spacing: 1.8px;
+}
+
+.tv-floating-next-content {
+  display: flex;
+  align-items: center;
+
+  gap: clamp(10px, 1vw, 15px);
+}
+
+.tv-floating-next-content img {
+  width: clamp(92px, 8vw, 130px);
+  aspect-ratio: 16 / 9;
+
+  flex-shrink: 0;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  background: #000;
+}
+
+.tv-floating-next-content > div {
+  min-width: 0;
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.tv-floating-next-content > div > strong {
+  display: -webkit-box;
+
+  overflow: hidden;
+
+  color: #f4ebe2;
+
+  font-size: clamp(13px, 1.05vw, 18px);
+  line-height: 1.2;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.tv-floating-next-content > div > span {
+  overflow: hidden;
+
+  color: #aa9b8f;
+
+  font-size: clamp(9px, 0.72vw, 12px);
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tv-floating-next-content small {
+  margin-top: 3px;
+
+  color: #86796e;
+
+  font-size: clamp(9px, 0.68vw, 11px);
+}
+
+.tv-floating-next-content small b {
+  color: #e2b56f;
+  font-weight: 900;
+}
+
+.tv-floating-empty {
+  color: #8a7e73;
+  font-size: clamp(11px, 0.8vw, 13px);
+}
+
+/* Fotos da noite */
+
+.tv-floating-photo {
+  position: absolute;
+  right: clamp(18px, 2.5vw, 38px);
+  bottom: clamp(18px, 3vh, 32px);
+  z-index: 21;
+
+  width: clamp(210px, 20vw, 330px);
+  max-width: calc(100vw - 36px);
+
+  padding: clamp(11px, 1vw, 15px);
+
+  border: 1px solid rgba(196, 140, 66, 0.38);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 17, 14, 0.91),
+      rgba(8, 7, 6, 0.78)
+    );
+
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.5);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  pointer-events: none;
+}
+
+.tv-floating-photo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 9px;
+}
+
+.tv-floating-photo-header > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.tv-floating-photo-header .tv-floating-label {
+  margin-bottom: 0;
+}
+
+.tv-floating-photo-header strong {
+  color: #d8cabd;
+
+  font-size: clamp(10px, 0.75vw, 13px);
+}
+
+.tv-floating-counter {
+  flex-shrink: 0;
+
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.07);
+  color: #a99b8f;
+
+  font-size: clamp(8px, 0.6vw, 10px);
+}
+
+.tv-floating-photo-stage {
+  position: relative;
+
+  width: 100%;
+  height: clamp(180px, 27vh, 330px);
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background: #050403;
+}
+
+.tv-floating-photo-stage img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  animation: tvPhotoFade 0.6s ease;
+}
+
+.tv-floating-photo-caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  padding: 34px 10px 9px;
+
+  background:
+    linear-gradient(
+      transparent,
+      rgba(0, 0, 0, 0.9)
+    );
+
+  color: #ded0c3;
+
+  font-size: clamp(8px, 0.65vw, 10px);
+}
+
+.tv-floating-photo-empty {
+  min-height: clamp(150px, 21vh, 240px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #7f746a;
+
+  text-align: center;
+}
+
+.tv-floating-photo-empty > span {
+  margin-bottom: 7px;
+
+  font-size: clamp(25px, 2.3vw, 38px);
+}
+
+.tv-floating-photo-empty strong {
+  color: #b6a79a;
+
+  font-size: clamp(11px, 0.8vw, 13px);
+}
+
+.tv-floating-photo-empty small {
+  margin-top: 4px;
+
+  font-size: clamp(8px, 0.65vw, 10px);
+}
+
+/* Erro flutuante */
+
+.tv-floating-error {
+  position: absolute;
+  bottom: clamp(18px, 3vh, 32px);
+  left: clamp(18px, 2.5vw, 38px);
+  z-index: 30;
+
+  max-width: min(520px, calc(100vw - 76px));
+
+  padding: 10px 14px;
+
+  border: 1px solid rgba(215, 100, 100, 0.35);
+  border-radius: 12px;
+
+  background: rgba(75, 14, 14, 0.88);
+  color: #ffc0c0;
+
+  font-size: 12px;
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Telas menores / projetores de baixa resolução */
+
+@media (max-width: 1100px), (max-height: 720px) {
+
+  .tv-floating-brand {
+    top: 10px;
+    padding: 7px 11px;
+  }
+
+  .tv-floating-brand > strong {
+    display: none;
+  }
+
+  .tv-floating-next {
+    top: 15px;
+    left: 15px;
+
+    width: clamp(260px, 34vw, 390px);
+
+    padding: 12px;
+  }
+
+  .tv-floating-photo {
+    right: 15px;
+    bottom: 15px;
+
+    width: clamp(190px, 21vw, 270px);
+
+    padding: 10px;
+  }
+
+  .tv-floating-photo-stage {
+    height: clamp(150px, 25vh, 230px);
+  }
+}
+
+/* Caso a janela fique estreita, os cards continuam sem criar scroll */
+
+@media (max-width: 720px) {
+
+  .tv-floating-brand {
+    display: none;
+  }
+
+  .tv-floating-next {
+    right: 12px;
+    left: 12px;
+
+    width: auto;
+    max-width: none;
+  }
+
+  .tv-floating-photo {
+    right: 12px;
+    bottom: 12px;
+
+    width: min(190px, 42vw);
+  }
+
+  .tv-floating-next-content img {
+    width: 84px;
+  }
+
+  .tv-floating-photo-stage {
+    height: min(190px, 27vh);
+  }
+}

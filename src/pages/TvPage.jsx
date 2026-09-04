@@ -15,7 +15,7 @@ export default function TvPage() {
   const [erro, setErro] =
     useState("");
 
-  const [playerPronto, setPlayerPronto] =
+  const [, setPlayerPronto] =
     useState(false);
 
   // ======================================================
@@ -691,312 +691,231 @@ export default function TvPage() {
   // ======================================================
 
   return (
-    <div className="tv-page">
+    <div className="tv-page tv-kiosk">
 
       {/* ==================================================
-          CABEÇALHO
+          PLAYER EM TELA CHEIA
       ================================================== */}
 
-      <header className="tv-header">
+      <main className="tv-stage">
 
-        <div>
+        <div className="youtube-wrapper tv-youtube-full">
+
+          <div
+            id="youtube-player"
+            className="youtube-player"
+          />
+
+          {/* SEM MÚSICA */}
+
+          {!tocando && !carregando && (
+            <div className="tv-player-overlay">
+
+              <div className="tv-empty">
+
+                <div>
+                  ♫
+                </div>
+
+                <h2>
+                  Aguardando música
+                </h2>
+
+                <p>
+                  Escolha uma música
+                  pelo QR Code.
+                </p>
+
+              </div>
+
+            </div>
+          )}
+
+          {/* CARREGAMENTO */}
+
+          {carregando && (
+            <div className="tv-player-overlay">
+
+              <div className="tv-empty">
+
+                <div>
+                  🐪
+                </div>
+
+                <h2>
+                  Preparando Jukebox
+                </h2>
+
+              </div>
+
+            </div>
+          )}
+
+        </div>
+
+        {/* ==================================================
+            MARCA / AO VIVO
+        ================================================== */}
+
+        <div className="tv-floating-brand">
 
           <span>
             🐪 NARGUILEAJU
           </span>
 
-          <h1>
-            Lounge Jukebox
-          </h1>
+          <strong>
+            LOUNGE JUKEBOX
+          </strong>
+
+          <small>
+            <i></i>
+            AO VIVO
+          </small>
 
         </div>
-
-        <div className="tv-live">
-
-          <span></span>
-
-          AO VIVO
-
-        </div>
-
-      </header>
-
-      {/* ERRO */}
-
-      {erro && (
-        <div className="tv-error">
-          {erro}
-        </div>
-      )}
-
-      <main className="tv-layout">
 
         {/* ==================================================
-            PLAYER
+            PRÓXIMA MÚSICA - FLUTUANTE
         ================================================== */}
 
-        <section className="tv-player-area">
+        <section className="tv-floating-next">
 
-          <div className="youtube-wrapper">
+          <span className="tv-floating-label">
+            PRÓXIMA MÚSICA
+          </span>
 
-            <div
-              id="youtube-player"
-              className="youtube-player"
-            />
+          {proxima ? (
 
-            {/* SEM MÚSICA */}
+            <div className="tv-floating-next-content">
 
-            {!tocando && (
-              <div className="tv-player-overlay">
+              {proxima.thumbnail_url && (
+                <img
+                  src={
+                    proxima
+                      .thumbnail_url
+                  }
+                  alt=""
+                />
+              )}
 
-                <div className="tv-empty">
+              <div>
 
-                  <div>
-                    ♫
-                  </div>
+                <strong>
+                  {proxima.titulo}
+                </strong>
 
-                  <h2>
-                    Aguardando música
-                  </h2>
+                <span>
+                  {proxima.artista}
+                </span>
 
-                  <p>
-                    Escolha uma música
-                    pelo QR Code.
-                  </p>
+                <small>
+                  Escolhida por{" "}
 
-                </div>
-
-              </div>
-            )}
-
-            {/* CARREGAMENTO */}
-
-            {carregando && (
-              <div className="tv-player-overlay">
-
-                <div className="tv-empty">
-
-                  <div>
-                    🐪
-                  </div>
-
-                  <h2>
-                    Preparando Jukebox
-                  </h2>
-
-                </div>
+                  <b>
+                    {proxima.nickname || "Cliente"}
+                  </b>
+                </small>
 
               </div>
-            )}
 
-          </div>
+            </div>
+
+          ) : (
+
+            <div className="tv-floating-empty">
+              Fila vazia
+            </div>
+
+          )}
 
         </section>
 
         {/* ==================================================
-            BARRA LATERAL
+            FOTO DA NOITE - FLUTUANTE
         ================================================== */}
 
-        <aside className="tv-sidebar">
+        <section className="tv-floating-photo">
 
-          {/* ================================================
-              TOCANDO AGORA
-          ================================================ */}
+          <div className="tv-floating-photo-header">
 
-          <section className="tv-info-card">
+            <div>
 
-            <span className="tv-label">
-              TOCANDO AGORA
-            </span>
+              <span className="tv-floating-label">
+                FOTOS DA NOITE
+              </span>
 
-            {tocando ? (
-
-              <>
-
-                {tocando.thumbnail_url && (
-                  <img
-                    className="tv-cover"
-                    src={
-                      tocando
-                        .thumbnail_url
-                    }
-                    alt=""
-                  />
-                )}
-
-                <h2>
-                  {tocando.titulo}
-                </h2>
-
-                <p>
-                  {tocando.artista}
-                </p>
-
-                <small className="tv-requested-by">
-                  Pedido por{" "}
-                  <strong>
-                    {tocando.nickname || "Cliente"}
-                  </strong>
-                </small>
-
-                {!playerPronto && (
-                  <small className="tv-player-status">
-                    Preparando
-                    player...
-                  </small>
-                )}
-
-              </>
-
-            ) : (
-
-              <div className="tv-no-song">
-                Nenhuma música tocando
-              </div>
-
-            )}
-
-          </section>
-
-          {/* ================================================
-              PRÓXIMA MÚSICA
-          ================================================ */}
-
-          <section className="tv-info-card next-song-card">
-
-            <span className="tv-label">
-              PRÓXIMA
-            </span>
-
-            {proxima ? (
-
-              <div className="tv-next">
-
-                {proxima.thumbnail_url && (
-                  <img
-                    src={
-                      proxima
-                        .thumbnail_url
-                    }
-                    alt=""
-                  />
-                )}
-
-                <div>
-
-                  <strong>
-                    {proxima.titulo}
-                  </strong>
-
-                  <span>
-                    {proxima.artista}
-                  </span>
-
-                  <small className="tv-requested-by">
-                    Escolhida por{" "}
-                    <strong>
-                      {proxima.nickname || "Cliente"}
-                    </strong>
-                  </small>
-
-                </div>
-
-              </div>
-
-            ) : (
-
-              <div className="tv-no-song">
-                Fila vazia
-              </div>
-
-            )}
-
-          </section>
-
-          {/* ================================================
-              SOCIAL WALL
-          ================================================ */}
-
-          <section className="tv-social-wall">
-
-            <div className="tv-social-header">
-
-              <div>
-
-                <span className="tv-label">
-                  FOTOS DA NOITE
-                </span>
-
-                <strong>
-                  Narguileaju
-                </strong>
-
-              </div>
-
-              {fotos.length > 0 && (
-                <span className="tv-photo-counter">
-
-                  {fotoAtualIndex + 1}
-
-                  {" / "}
-
-                  {fotos.length}
-
-                </span>
-              )}
+              <strong>
+                Narguileaju
+              </strong>
 
             </div>
 
-            {fotoAtual ? (
+            {fotos.length > 0 && (
+              <span className="tv-floating-counter">
 
-              <div className="tv-photo-stage">
+                {fotoAtualIndex + 1}
 
-                <img
-                  key={
-                    fotoAtual.id
-                  }
-                  src={
-                    fotoAtual
-                      .arquivo_url
-                  }
-                  alt="Foto da noite"
-                />
+                {" / "}
 
-                <div className="tv-photo-overlay">
+                {fotos.length}
 
-                  <span>
-                    📷 Compartilhe
-                    seu momento
-                  </span>
-
-                </div>
-
-              </div>
-
-            ) : (
-
-              <div className="tv-social-empty">
-
-                <span>
-                  📷
-                </span>
-
-                <strong>
-                  Fotos da noite
-                </strong>
-
-                <small>
-                  Envie uma foto
-                  pelo QR Code
-                </small>
-
-              </div>
-
+              </span>
             )}
 
-          </section>
+          </div>
 
-        </aside>
+          {fotoAtual ? (
+
+            <div className="tv-floating-photo-stage">
+
+              <img
+                key={
+                  fotoAtual.id
+                }
+                src={
+                  fotoAtual
+                    .arquivo_url
+                }
+                alt="Foto da noite"
+              />
+
+              <div className="tv-floating-photo-caption">
+                📷 Compartilhe seu momento
+              </div>
+
+            </div>
+
+          ) : (
+
+            <div className="tv-floating-photo-empty">
+
+              <span>
+                📷
+              </span>
+
+              <strong>
+                Fotos da noite
+              </strong>
+
+              <small>
+                Envie uma foto pelo QR Code
+              </small>
+
+            </div>
+
+          )}
+
+        </section>
+
+        {/* ==================================================
+            ERRO
+        ================================================== */}
+
+        {erro && (
+          <div className="tv-floating-error">
+            {erro}
+          </div>
+        )}
 
       </main>
 
