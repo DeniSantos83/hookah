@@ -11,11 +11,7 @@ body,
 body {
   margin: 0;
 
-  font-family:
-    Inter,
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
 
   background: #080706;
   color: #f7f0e7;
@@ -40,17 +36,8 @@ input {
   padding: 24px;
 
   background:
-    radial-gradient(
-      circle at top,
-      rgba(190, 126, 51, 0.2),
-      transparent 36%
-    ),
-    linear-gradient(
-      180deg,
-      #17100c 0%,
-      #090706 55%,
-      #050404 100%
-    );
+    radial-gradient(circle at top, rgba(190, 126, 51, 0.2), transparent 36%),
+    linear-gradient(180deg, #17100c 0%, #090706 55%, #050404 100%);
 }
 
 .login-container {
@@ -92,8 +79,7 @@ input {
 
   background: rgba(25, 20, 17, 0.94);
 
-  box-shadow:
-    0 25px 70px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
 }
 
 .login-tabs {
@@ -256,11 +242,7 @@ input:focus {
   min-height: 100vh;
 
   background:
-    radial-gradient(
-      circle at top,
-      rgba(196, 140, 66, 0.12),
-      transparent 30%
-    ),
+    radial-gradient(circle at top, rgba(196, 140, 66, 0.12), transparent 30%),
     #080706;
 
   color: #f7f0e7;
@@ -333,17 +315,15 @@ input:focus {
 
   padding: 22px;
 
-  border: 1px solid
-    rgba(196, 140, 66, 0.25);
+  border: 1px solid rgba(196, 140, 66, 0.25);
 
   border-radius: 18px;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(196, 140, 66, 0.13),
-      rgba(30, 24, 20, 0.8)
-    );
+  background: linear-gradient(
+    135deg,
+    rgba(196, 140, 66, 0.13),
+    rgba(30, 24, 20, 0.8)
+  );
 }
 
 .music-limit-icon {
@@ -475,12 +455,7 @@ input:focus {
 
   border-radius: 12px;
 
-  background: rgba(
-    0,
-    0,
-    0,
-    0.15
-  );
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .cliente-footer {
@@ -518,12 +493,7 @@ input:focus {
 
   border-radius: 10px;
 
-  background: rgba(
-    150,
-    30,
-    30,
-    0.15
-  );
+  background: rgba(150, 30, 30, 0.15);
 
   color: #ffaaaa;
 }
@@ -535,11 +505,7 @@ input:focus {
   min-height: 100vh;
 
   background:
-    radial-gradient(
-      circle at top,
-      rgba(196, 140, 66, 0.12),
-      transparent 30%
-    ),
+    radial-gradient(circle at top, rgba(196, 140, 66, 0.12), transparent 30%),
     #080706;
 
   color: #f7f0e7;
@@ -750,8 +716,7 @@ input:focus {
 }
 
 .buscar-error {
-  border: 1px solid
-    rgba(255, 100, 100, 0.2);
+  border: 1px solid rgba(255, 100, 100, 0.2);
 
   background: rgba(130, 20, 20, 0.15);
 
@@ -759,8 +724,7 @@ input:focus {
 }
 
 .buscar-success {
-  border: 1px solid
-    rgba(100, 220, 140, 0.2);
+  border: 1px solid rgba(100, 220, 140, 0.2);
 
   background: rgba(20, 120, 60, 0.15);
 
@@ -857,15 +821,9 @@ input:focus {
 }
 
 .my-music-card.music-playing {
-  border-color:
-    rgba(196, 140, 66, 0.55);
+  border-color: rgba(196, 140, 66, 0.55);
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(196, 140, 66, 0.11),
-      #12100e
-    );
+  background: linear-gradient(135deg, rgba(196, 140, 66, 0.11), #12100e);
 }
 
 /* ======================================================
@@ -1061,7 +1019,6 @@ input:focus {
 ====================================================== */
 
 @media (max-width: 480px) {
-
   .my-music-thumbnail {
     width: 90px;
     height: 57px;
@@ -1070,7 +1027,6 @@ input:focus {
   .my-music-info > strong {
     font-size: 13px;
   }
-
 }
 /* ======================================================
    PAINEL DO ANFITRIÃO
@@ -1501,7 +1457,6 @@ input:focus {
 }
 
 @media (max-width: 600px) {
-
   .admin-header {
     gap: 15px;
   }
@@ -1521,7 +1476,6 @@ input:focus {
     width: 75px;
     height: 50px;
   }
-
 }
 /* ======================================================
    NARGUILEAJU TV
@@ -1811,21 +1765,18 @@ input:focus {
 }
 
 @media (max-width: 900px) {
-
   .tv-layout {
     grid-template-columns: 1fr;
   }
 
   .tv-sidebar {
     display: grid;
-    grid-template-columns:
-      repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .tv-social-placeholder {
     grid-column: 1 / -1;
   }
-
 }
 /* ======================================================
    PLAYER TV - OVERLAY
@@ -1890,13 +1841,11 @@ input:focus {
 
   margin-bottom: 15px;
 
-  border: 1px solid
-    rgba(100, 220, 140, 0.2);
+  border: 1px solid rgba(100, 220, 140, 0.2);
 
   border-radius: 10px;
 
-  background:
-    rgba(20, 120, 60, 0.15);
+  background: rgba(20, 120, 60, 0.15);
 
   color: #9fe0b5;
 
@@ -1932,11 +1881,7 @@ input:focus {
 .admin-photo-grid {
   display: grid;
 
-  grid-template-columns:
-    repeat(
-      auto-fill,
-      minmax(210px, 1fr)
-    );
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
 
   gap: 14px;
 
@@ -1968,12 +1913,10 @@ input:focus {
 
   object-fit: cover;
 
-  transition:
-    transform 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
-.admin-photo-card:hover
-.admin-photo-image img {
+.admin-photo-card:hover .admin-photo-image img {
   transform: scale(1.03);
 }
 
@@ -2004,8 +1947,7 @@ input:focus {
 .admin-photo-actions {
   display: grid;
 
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 
   gap: 7px;
 
@@ -2024,33 +1966,27 @@ input:focus {
 }
 
 .approve-photo-button {
-  border: 1px solid
-    rgba(90, 170, 110, 0.35);
+  border: 1px solid rgba(90, 170, 110, 0.35);
 
-  background:
-    rgba(50, 120, 70, 0.15);
+  background: rgba(50, 120, 70, 0.15);
 
   color: #86c995;
 }
 
 .approve-photo-button:hover {
-  background:
-    rgba(50, 120, 70, 0.25);
+  background: rgba(50, 120, 70, 0.25);
 }
 
 .reject-photo-button {
-  border: 1px solid
-    rgba(190, 80, 80, 0.3);
+  border: 1px solid rgba(190, 80, 80, 0.3);
 
-  background:
-    rgba(130, 30, 30, 0.12);
+  background: rgba(130, 30, 30, 0.12);
 
   color: #ca7777;
 }
 
 .reject-photo-button:hover {
-  background:
-    rgba(130, 30, 30, 0.22);
+  background: rgba(130, 30, 30, 0.22);
 }
 
 .admin-photo-actions button:disabled {
@@ -2060,17 +1996,13 @@ input:focus {
 }
 
 @media (max-width: 600px) {
-
   .admin-photo-grid {
-    grid-template-columns:
-      repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .admin-photo-actions {
-    grid-template-columns:
-      1fr;
+    grid-template-columns: 1fr;
   }
-
 }
 /* ======================================================
    TV - SOCIAL WALL
@@ -2140,8 +2072,7 @@ input:focus {
 
   object-fit: cover;
 
-  animation:
-    tvPhotoFade 0.6s ease;
+  animation: tvPhotoFade 0.6s ease;
 }
 
 .tv-photo-overlay {
@@ -2153,11 +2084,7 @@ input:focus {
 
   padding: 25px 12px 10px;
 
-  background:
-    linear-gradient(
-      transparent,
-      rgba(0, 0, 0, 0.85)
-    );
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
 
   color: #d8cabd;
 
@@ -2355,7 +2282,6 @@ input:focus {
   }
 }
 
-
 /* ======================================================
    TV KIOSK / PROJETOR
    Vídeo em tela cheia + cards flutuantes
@@ -2493,15 +2419,13 @@ input:focus {
   border: 1px solid rgba(196, 140, 66, 0.42);
   border-radius: 18px;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(22, 18, 15, 0.92),
-      rgba(8, 7, 6, 0.78)
-    );
+  background: linear-gradient(
+    135deg,
+    rgba(22, 18, 15, 0.92),
+    rgba(8, 7, 6, 0.78)
+  );
 
-  box-shadow:
-    0 18px 55px rgba(0, 0, 0, 0.48);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.48);
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -2611,15 +2535,13 @@ input:focus {
   border: 1px solid rgba(196, 140, 66, 0.38);
   border-radius: 18px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(20, 17, 14, 0.91),
-      rgba(8, 7, 6, 0.78)
-    );
+  background: linear-gradient(
+    145deg,
+    rgba(20, 17, 14, 0.91),
+    rgba(8, 7, 6, 0.78)
+  );
 
-  box-shadow:
-    0 18px 55px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.5);
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -2699,11 +2621,7 @@ input:focus {
 
   padding: 34px 10px 9px;
 
-  background:
-    linear-gradient(
-      transparent,
-      rgba(0, 0, 0, 0.9)
-    );
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
 
   color: #ded0c3;
 
@@ -2770,7 +2688,6 @@ input:focus {
 /* Telas menores / projetores de baixa resolução */
 
 @media (max-width: 1100px), (max-height: 720px) {
-
   .tv-floating-brand {
     top: 10px;
     padding: 7px 11px;
@@ -2806,7 +2723,6 @@ input:focus {
 /* Caso a janela fique estreita, os cards continuam sem criar scroll */
 
 @media (max-width: 720px) {
-
   .tv-floating-brand {
     display: none;
   }
@@ -2834,7 +2750,6 @@ input:focus {
     height: min(190px, 27vh);
   }
 }
-
 
 /* ======================================================
    ADMIN - MENSAGEM DO TELÃO
@@ -2907,8 +2822,7 @@ input:focus {
 .admin-tv-message-input:focus {
   border-color: #c48c42;
 
-  box-shadow:
-    0 0 0 3px rgba(196, 140, 66, 0.08);
+  box-shadow: 0 0 0 3px rgba(196, 140, 66, 0.08);
 }
 
 .admin-tv-message-input:disabled {
@@ -2984,7 +2898,6 @@ input:focus {
 }
 
 @media (max-width: 600px) {
-
   .admin-tv-message-meta {
     flex-direction: column;
     gap: 3px;
@@ -2998,7 +2911,6 @@ input:focus {
     width: 100%;
   }
 }
-
 
 /* ======================================================
    TV KIOSK - LETREIRO
@@ -3020,16 +2932,14 @@ input:focus {
 
   border-top: 1px solid rgba(196, 140, 66, 0.22);
 
-  background:
-    linear-gradient(
-      90deg,
-      rgba(4, 4, 4, 0.93),
-      rgba(12, 10, 8, 0.86) 50%,
-      rgba(4, 4, 4, 0.93)
-    );
+  background: linear-gradient(
+    90deg,
+    rgba(4, 4, 4, 0.93),
+    rgba(12, 10, 8, 0.86) 50%,
+    rgba(4, 4, 4, 0.93)
+  );
 
-  box-shadow:
-    0 -10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
 
   pointer-events: none;
 }
@@ -3051,23 +2961,13 @@ input:focus {
 .tv-ticker::before {
   left: 0;
 
-  background:
-    linear-gradient(
-      90deg,
-      #050403,
-      transparent
-    );
+  background: linear-gradient(90deg, #050403, transparent);
 }
 
 .tv-ticker::after {
   right: 0;
 
-  background:
-    linear-gradient(
-      270deg,
-      #050403,
-      transparent
-    );
+  background: linear-gradient(270deg, #050403, transparent);
 }
 
 .tv-ticker-track {
@@ -3080,8 +2980,7 @@ input:focus {
 
   will-change: transform;
 
-  animation:
-    tvTickerScroll 24s linear infinite;
+  animation: tvTickerScroll 24s linear infinite;
 }
 
 .tv-ticker-item {
@@ -3099,8 +2998,7 @@ input:focus {
 
   letter-spacing: 0.4px;
 
-  text-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
 }
 
 .tv-ticker-item b {
@@ -3130,7 +3028,6 @@ input:focus {
 */
 
 @media (max-height: 720px) {
-
   .tv-ticker {
     height: 42px;
   }
@@ -3141,8 +3038,1005 @@ input:focus {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .tv-ticker-track {
     animation-duration: 45s;
+  }
+}
+
+/* ======================================================
+   TV - LIKES AO VIVO
+   Contador permanente + reação flutuante
+====================================================== */
+
+.tv-current-likes {
+  position: absolute;
+  top: clamp(76px, 11vh, 112px);
+  left: 50%;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 7px 12px;
+
+  border: 1px solid rgba(196, 140, 66, 0.34);
+  border-radius: 999px;
+
+  background: rgba(8, 7, 6, 0.7);
+  color: #f4ebe2;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.tv-current-likes > span {
+  font-size: clamp(14px, 1.2vw, 20px);
+}
+
+.tv-current-likes > strong {
+  color: #f1c982;
+  font-size: clamp(14px, 1.15vw, 20px);
+  font-weight: 900;
+}
+
+.tv-current-likes > small {
+  color: #a99b8f;
+  font-size: clamp(8px, 0.62vw, 10px);
+  font-weight: 900;
+  letter-spacing: 1.4px;
+}
+
+.tv-next-likes {
+  width: fit-content;
+  margin-top: 2px !important;
+  padding: 4px 7px;
+
+  border: 1px solid rgba(196, 140, 66, 0.22);
+  border-radius: 999px;
+
+  background: rgba(196, 140, 66, 0.1);
+  color: #d8ad68 !important;
+
+  font-weight: 800;
+}
+
+/* ======================================================
+   CORREÇÃO - CARD DE LIKES DO TELÃO
+====================================================== */
+
+/* ======================================================
+   POSIÇÃO FINAL - LIKES DO TELÃO
+====================================================== */
+
+.tv-current-likes {
+  position: absolute !important;
+
+  /* acima do ranking */
+  top: clamp(78px, 8vh, 92px) !important;
+  right: clamp(18px, 2.2vw, 34px) !important;
+  left: auto !important;
+
+  width: auto !important;
+  min-width: 145px !important;
+  max-width: 210px !important;
+
+  padding: 10px 16px !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 9px !important;
+
+  border-radius: 14px !important;
+  white-space: nowrap !important;
+
+  z-index: 22 !important;
+}
+
+/* Ranking fica abaixo do contador */
+.tv-dj-ranking {
+  top: clamp(145px, 17vh, 180px) !important;
+}
+
+.tv-like-burst-hand {
+  font-size: clamp(54px, 6vw, 96px);
+  line-height: 1;
+
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.42));
+
+  animation: tvLikeHand 0.65s cubic-bezier(0.2, 1.35, 0.45, 1) both;
+}
+
+.tv-like-burst > strong {
+  margin-top: 10px;
+
+  color: #f1c982;
+
+  font-size: clamp(16px, 1.6vw, 27px);
+  font-weight: 950;
+  letter-spacing: 1px;
+}
+
+.tv-like-burst > span {
+  margin-top: 4px;
+
+  color: #d8cabd;
+
+  font-size: clamp(10px, 0.85vw, 14px);
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+@keyframes tvLikeHand {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.35) rotate(-12deg);
+  }
+
+  65% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.18) rotate(5deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}
+
+@keyframes tvLikeBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -43%) scale(0.82);
+  }
+
+  15%,
+  72% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -62%) scale(1.05);
+  }
+}
+
+@media (max-width: 1100px), (max-height: 720px) {
+  .tv-current-likes {
+    top: 58px;
+    padding: 6px 10px;
+  }
+
+  .tv-like-burst {
+    top: 50%;
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 720px) {
+  .tv-current-likes {
+    top: 12px;
+    right: 12px;
+    left: auto;
+    transform: none;
+  }
+
+  .tv-like-burst {
+    min-width: 150px;
+    max-width: calc(100vw - 40px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tv-like-burst,
+  .tv-like-burst-hand {
+    animation-duration: 0.01ms;
+  }
+}
+
+/* ======================================================
+   CLIENTE - FILA DA GALERA / SISTEMA DE LIKES
+====================================================== */
+
+.community-queue {
+  margin-top: 32px;
+  margin-bottom: 34px;
+}
+
+.community-now,
+.community-waiting {
+  margin-bottom: 26px;
+}
+
+.community-now .section-title,
+.community-waiting .section-title {
+  margin-bottom: 14px;
+}
+
+.community-music-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.community-music-card {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+
+  width: 100%;
+  padding: 11px;
+
+  border: 1px solid #2d2723;
+  border-radius: 16px;
+
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.018), transparent 55%),
+    #12100e;
+
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+}
+
+.community-playing-card {
+  border-color: rgba(196, 140, 66, 0.55);
+
+  background: linear-gradient(
+    135deg,
+    rgba(196, 140, 66, 0.14),
+    rgba(18, 16, 14, 0.96) 58%
+  );
+}
+
+.community-thumbnail {
+  position: relative;
+
+  width: 112px;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+  overflow: hidden;
+
+  border-radius: 11px;
+
+  background: #080706;
+  color: #c48c42;
+
+  font-size: 24px;
+}
+
+.community-thumbnail img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.community-playing-card .community-thumbnail::after {
+  content: "AO VIVO";
+
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+
+  padding: 4px 6px;
+
+  border-radius: 999px;
+
+  background: rgba(196, 140, 66, 0.94);
+  color: #160f09;
+
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+}
+
+.community-music-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.community-music-info > strong {
+  display: -webkit-box;
+
+  overflow: hidden;
+
+  color: #eee2d7;
+
+  font-size: 14px;
+  line-height: 1.3;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.community-music-info > span {
+  overflow: hidden;
+
+  color: #81746a;
+
+  font-size: 11px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.community-music-info > small {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: 3px;
+
+  color: #6f655d;
+
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.community-music-info > small strong {
+  color: #c48c42;
+  font-weight: 800;
+}
+
+.like-button {
+  min-width: 88px;
+  min-height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 9px 12px;
+
+  border: 1px solid rgba(196, 140, 66, 0.38);
+  border-radius: 999px;
+
+  background: rgba(196, 140, 66, 0.1);
+  color: #e7bc78;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.like-button:hover:not(:disabled) {
+  border-color: #c48c42;
+
+  background: rgba(196, 140, 66, 0.2);
+
+  transform: translateY(-1px);
+}
+
+.like-button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.like-button.liked {
+  border-color: #c48c42;
+
+  background: #c48c42;
+  color: #160f09;
+}
+
+.like-button.own-song {
+  border-color: #302a25;
+
+  background: #181512;
+  color: #71675f;
+}
+
+.like-button:disabled {
+  cursor: default;
+}
+
+.like-button:not(.liked):not(.own-song):disabled {
+  opacity: 0.58;
+  cursor: wait;
+}
+
+.like-hand {
+  display: inline-block;
+
+  font-size: 15px;
+  line-height: 1;
+}
+
+.like-button.liked .like-hand {
+  animation: clienteLikePulse 0.42s ease;
+}
+
+@keyframes clienteLikePulse {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.38) rotate(-8deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Estado vazio da fila geral */
+.community-waiting .empty-music-list {
+  min-height: 115px;
+}
+
+/* ======================================================
+   CLIENTE - FILA DA GALERA / CELULAR
+====================================================== */
+
+@media (max-width: 600px) {
+  .community-queue {
+    margin-top: 28px;
+  }
+
+  .community-music-card {
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 11px;
+
+    padding: 9px;
+  }
+
+  .community-thumbnail {
+    width: 92px;
+    height: 58px;
+  }
+
+  .community-music-info > strong {
+    font-size: 13px;
+  }
+
+  .community-music-info > span {
+    font-size: 10px;
+  }
+
+  .community-music-info > small {
+    font-size: 9px;
+  }
+
+  .like-button {
+    grid-column: 1 / -1;
+
+    width: 100%;
+    min-height: 39px;
+
+    margin-top: 1px;
+
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .community-music-card {
+    grid-template-columns: 82px minmax(0, 1fr);
+  }
+
+  .community-thumbnail {
+    width: 82px;
+    height: 53px;
+  }
+
+  .like-button {
+    font-size: 10px;
+  }
+}
+
+/* ======================================================
+   TV - LIKES EM DESTAQUE
+   Compatível com TvPage_like_destaque_atualizacao_seletiva.jsx
+====================================================== */
+
+/* Contador da música que está tocando */
+.tv-current-likes {
+  position: absolute;
+  top: clamp(78px, 11vh, 118px);
+  right: clamp(20px, 3vw, 48px);
+  z-index: 24;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  min-width: 178px;
+  padding: 12px 18px;
+
+  border: 1px solid rgba(217, 164, 84, 0.7);
+  border-radius: 18px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(196, 140, 66, 0.24),
+    rgba(8, 7, 6, 0.9) 62%
+  );
+
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, 0.48),
+    0 0 28px rgba(196, 140, 66, 0.14);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  pointer-events: none;
+}
+
+.tv-current-like-hand {
+  display: block;
+
+  font-size: clamp(30px, 2.6vw, 48px);
+  line-height: 1;
+
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.35));
+
+  animation: tvLikeHandIdle 2.6s ease-in-out infinite;
+}
+
+.tv-current-like-copy {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: end;
+  column-gap: 7px;
+}
+
+.tv-current-like-copy small {
+  grid-column: 1 / -1;
+
+  margin-bottom: 1px;
+
+  color: #e0b66f;
+
+  font-size: clamp(8px, 0.65vw, 10px);
+  font-weight: 900;
+  letter-spacing: 1.25px;
+  white-space: nowrap;
+}
+
+.tv-current-like-copy strong {
+  color: #fff3df;
+
+  font-size: clamp(27px, 2.2vw, 40px);
+  font-weight: 950;
+  line-height: 0.95;
+
+  text-shadow: 0 2px 15px rgba(217, 164, 84, 0.28);
+}
+
+.tv-current-like-copy > span {
+  padding-bottom: 3px;
+
+  color: #c48c42;
+
+  font-size: clamp(9px, 0.7vw, 12px);
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+/* Likes dentro do card da próxima música */
+.tv-next-likes {
+  width: fit-content;
+
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: 8px;
+  padding: 6px 10px;
+
+  border: 1px solid rgba(196, 140, 66, 0.48);
+  border-radius: 999px;
+
+  background: rgba(196, 140, 66, 0.16);
+  color: #e8c383 !important;
+
+  font-size: clamp(9px, 0.7vw, 11px) !important;
+  font-weight: 800;
+
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+}
+
+.tv-next-likes .tv-next-like-hand {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.tv-next-likes strong {
+  color: #fff0d4;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.tv-next-likes > span:last-child {
+  color: #d4a75f;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+}
+
+/* Explosão visual quando chega uma nova curtida */
+.tv-like-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 40;
+
+  min-width: clamp(220px, 22vw, 350px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: clamp(22px, 3vw, 38px);
+
+  border: 2px solid rgba(229, 179, 98, 0.92);
+  border-radius: 28px;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(196, 140, 66, 0.35),
+    rgba(13, 10, 8, 0.94) 68%
+  );
+
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.62),
+    0 0 55px rgba(196, 140, 66, 0.32);
+
+  text-align: center;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+
+  animation: tvLikeBurstIn 2.6s ease both;
+}
+
+.tv-like-burst::before,
+.tv-like-burst::after {
+  content: "✦";
+
+  position: absolute;
+
+  color: #e0ad5c;
+
+  font-size: 28px;
+
+  animation: tvLikeSpark 1.1s ease-in-out infinite alternate;
+}
+
+.tv-like-burst::before {
+  top: 17px;
+  left: 22px;
+}
+
+.tv-like-burst::after {
+  right: 22px;
+  bottom: 17px;
+
+  animation-delay: 0.25s;
+}
+
+.tv-like-burst-hand {
+  margin-bottom: 8px;
+
+  font-size: clamp(62px, 7vw, 110px);
+  line-height: 1;
+
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.45))
+    drop-shadow(0 0 18px rgba(217, 164, 84, 0.28));
+
+  animation: tvLikeThumbPop 0.72s cubic-bezier(0.2, 0.9, 0.25, 1.35);
+}
+
+.tv-like-burst strong {
+  color: #ffe2a8;
+
+  font-size: clamp(24px, 2.7vw, 46px);
+  font-weight: 950;
+  letter-spacing: 1px;
+  line-height: 1;
+
+  text-shadow: 0 4px 22px rgba(196, 140, 66, 0.36);
+}
+
+.tv-like-burst > span {
+  margin-top: 9px;
+
+  color: #f5eadc;
+
+  font-size: clamp(11px, 0.9vw, 15px);
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+@keyframes tvLikeHandIdle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(-3px) rotate(-5deg);
+  }
+}
+
+@keyframes tvLikeThumbPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.25) rotate(-22deg);
+  }
+
+  58% {
+    opacity: 1;
+    transform: scale(1.2) rotate(8deg);
+  }
+
+  78% {
+    transform: scale(0.94) rotate(-3deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes tvLikeSpark {
+  from {
+    opacity: 0.35;
+    transform: scale(0.75) rotate(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.18) rotate(18deg);
+  }
+}
+
+@keyframes tvLikeBurstIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.68);
+  }
+
+  14% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  22% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  82% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -54%) scale(0.96);
+  }
+}
+
+/* Projetores/telas menores */
+@media (max-width: 900px) {
+  .tv-current-likes {
+    top: 74px;
+    right: 16px;
+
+    min-width: 150px;
+    padding: 10px 13px;
+  }
+
+  .tv-current-like-hand {
+    font-size: 30px;
+  }
+
+  .tv-current-like-copy strong {
+    font-size: 27px;
+  }
+
+  .tv-like-burst {
+    min-width: 210px;
+  }
+}
+
+/* ======================================================
+   TV - RANKING DOS DJs
+   Top 3 alternando entre NOITE e MÊS
+====================================================== */
+
+.tv-dj-ranking {
+  position: absolute;
+  top: clamp(82px, 11vh, 118px);
+  right: clamp(18px, 2.2vw, 34px);
+  z-index: 19;
+
+  width: clamp(230px, 19vw, 300px);
+  padding: 13px 14px 12px;
+
+  border: 1px solid rgba(196, 140, 66, 0.42);
+  border-radius: 16px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(12, 10, 8, 0.91),
+    rgba(24, 18, 13, 0.82)
+  );
+
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  pointer-events: none;
+  animation: tvRankingEntrada 0.45s ease;
+}
+
+.tv-dj-ranking-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding-bottom: 9px;
+  margin-bottom: 7px;
+
+  border-bottom: 1px solid rgba(196, 140, 66, 0.18);
+}
+
+.tv-dj-ranking-header > span {
+  color: #e5b96f;
+  font-size: clamp(10px, 0.78vw, 13px);
+  font-weight: 900;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.tv-dj-ranking-header > small {
+  padding: 4px 7px;
+
+  border: 1px solid rgba(196, 140, 66, 0.3);
+  border-radius: 999px;
+
+  background: rgba(196, 140, 66, 0.12);
+  color: #cfa35e;
+
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.tv-dj-ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tv-dj-ranking-item {
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: 25px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px;
+
+  min-height: 31px;
+  padding: 5px 7px;
+
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.tv-dj-ranking-item.tv-dj-position-1 {
+  background: linear-gradient(
+    90deg,
+    rgba(196, 140, 66, 0.16),
+    rgba(255, 255, 255, 0.025)
+  );
+}
+
+.tv-dj-medal {
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+}
+
+.tv-dj-ranking-item > strong {
+  overflow: hidden;
+
+  color: #f1e5da;
+
+  font-size: clamp(10px, 0.75vw, 12px);
+  font-weight: 800;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tv-dj-likes {
+  color: #d8a85f;
+
+  font-size: clamp(9px, 0.68vw, 11px);
+  font-weight: 900;
+
+  white-space: nowrap;
+}
+
+.tv-dj-ranking-call {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #8f8175;
+
+  font-size: clamp(8px, 0.58vw, 9px);
+  font-weight: 700;
+
+  text-align: center;
+  letter-spacing: 0.25px;
+}
+
+@keyframes tvRankingEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Telas menores / projetores com resolução reduzida */
+@media (max-width: 1100px), (max-height: 700px) {
+  .tv-dj-ranking {
+    top: 76px;
+    right: 16px;
+    width: 220px;
+    padding: 10px 11px;
+  }
+
+  .tv-dj-ranking-item {
+    min-height: 27px;
+    padding: 4px 6px;
+  }
+
+  .tv-dj-ranking-call {
+    display: none;
   }
 }
