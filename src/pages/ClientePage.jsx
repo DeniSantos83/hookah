@@ -260,26 +260,34 @@ export default function ClientePage() {
   // ======================================================
 
   async function sair() {
-    const clienteId = localStorage.getItem("narguileaju_cliente_id");
+    const token = localStorage.getItem("narguileaju_token");
 
     try {
-      // Registra a saída antes de apagar a identificação do navegador.
-      if (clienteId) {
-        const { error } = await supabase.rpc("encerrar_sessao_cliente", {
-          p_cliente_id: clienteId,
+      // O token identifica exatamente a conta deste navegador.
+      // Assim, o banco confirma que a sessão foi encerrada antes do logout.
+      if (token) {
+        const { data, error } = await supabase.rpc("encerrar_sessao_cliente", {
+          p_token: token,
         });
 
         if (error) {
           throw error;
         }
+
+        if (!data?.sucesso) {
+          throw new Error(
+            data?.mensagem || "Não foi possível encerrar a sessão.",
+          );
+        }
       }
     } catch (error) {
-      // Mesmo se a conexão falhar, o cliente ainda consegue sair do Jukebox.
       console.error("Não foi possível encerrar a sessão do lounge:", error);
-    } finally {
-      limparSessao();
-      navigate("/");
+      setErro("Não foi possível confirmar sua saída. Tente novamente.");
+      return;
     }
+
+    limparSessao();
+    navigate("/");
   }
 
   // ======================================================

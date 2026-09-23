@@ -615,9 +615,9 @@ export default function AdminPage() {
 
           <div className="duration-limit-buttons">
             {[
-              { label: "2 min", value: 120 },
-              { label: "4 min", value: 240 },
-              { label: "6 min", value: 360 },
+              { label: "5 min", value: 300 },
+              { label: "10 min", value: 600 },
+              { label: "15 min", value: 900 },
               { label: "30 min", value: 1800 },
               { label: "1 hora", value: 3600 },
               { label: "Sem limite", value: null },
