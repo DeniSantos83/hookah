@@ -259,9 +259,27 @@ export default function ClientePage() {
   // SAIR
   // ======================================================
 
-  function sair() {
-    limparSessao();
-    navigate("/");
+  async function sair() {
+    const clienteId = localStorage.getItem("narguileaju_cliente_id");
+
+    try {
+      // Registra a saída antes de apagar a identificação do navegador.
+      if (clienteId) {
+        const { error } = await supabase.rpc("encerrar_sessao_cliente", {
+          p_cliente_id: clienteId,
+        });
+
+        if (error) {
+          throw error;
+        }
+      }
+    } catch (error) {
+      // Mesmo se a conexão falhar, o cliente ainda consegue sair do Jukebox.
+      console.error("Não foi possível encerrar a sessão do lounge:", error);
+    } finally {
+      limparSessao();
+      navigate("/");
+    }
   }
 
   // ======================================================
