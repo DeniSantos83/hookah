@@ -19,6 +19,12 @@ export default function ClientePage() {
 
   const [enviandoFoto, setEnviandoFoto] = useState(false);
 
+  // Autorização para envio/uso da foto
+  const [fotoSelecionada, setFotoSelecionada] = useState(null);
+  const [mostrarTermoFoto, setMostrarTermoFoto] = useState(false);
+  const [confirmouMaioridade, setConfirmouMaioridade] = useState(false);
+  const [autorizouImagem, setAutorizouImagem] = useState(false);
+
   // ======================================================
   // INICIALIZAÇÃO + REALTIME
   // ======================================================
@@ -295,6 +301,11 @@ export default function ClientePage() {
   // ======================================================
 
   function escolherMusica() {
+    if (cliente?.jukebox_ativo === false) {
+      setErro("O Jukebox está fechado no momento. Volte na próxima noite.");
+      return;
+    }
+
     if ((cliente?.restantes ?? 0) <= 0) {
       return;
     }
@@ -307,6 +318,11 @@ export default function ClientePage() {
   // ======================================================
 
   async function curtirMusica(musica) {
+    if (cliente?.jukebox_ativo === false) {
+      setErro("O Jukebox está fechado no momento. As curtidas estão pausadas.");
+      return;
+    }
+
     if (
       !musica ||
       musica.minha_musica ||
@@ -375,6 +391,11 @@ export default function ClientePage() {
   // ======================================================
 
   function abrirSeletorFoto() {
+    if (cliente?.jukebox_ativo === false) {
+      setErro("O Jukebox está fechado no momento. O envio de fotos está pausado.");
+      return;
+    }
+
     if (enviandoFoto) {
       return;
     }
@@ -392,15 +413,69 @@ export default function ClientePage() {
   async function selecionarFoto(event) {
     const arquivo = event.target.files?.[0];
 
-    // Permite selecionar a mesma foto novamente
+    // Permite selecionar a mesma foto novamente.
     event.target.value = "";
 
     if (!arquivo) {
       return;
     }
 
-    const token = localStorage.getItem("narguileaju_token");
+    const tiposPermitidos = ["image/jpeg", "image/png", "image/webp"];
 
+    if (!tiposPermitidos.includes(arquivo.type)) {
+      setErro("Escolha uma imagem JPG, PNG ou WEBP.");
+      return;
+    }
+
+    const limiteBytes = 10 * 1024 * 1024;
+
+    if (arquivo.size > limiteBytes) {
+      setErro("A imagem pode ter no máximo 10 MB.");
+      return;
+    }
+
+    // Não envia ainda. Primeiro abre o termo de autorização.
+    setFotoSelecionada(arquivo);
+    setConfirmouMaioridade(false);
+    setAutorizouImagem(false);
+    setMostrarTermoFoto(true);
+    setErro("");
+    setMensagem("");
+  }
+
+  function cancelarEnvioFoto() {
+    if (enviandoFoto) {
+      return;
+    }
+
+    setMostrarTermoFoto(false);
+    setFotoSelecionada(null);
+    setConfirmouMaioridade(false);
+    setAutorizouImagem(false);
+  }
+
+  async function confirmarEEnviarFoto() {
+    const arquivo = fotoSelecionada;
+
+    if (cliente?.jukebox_ativo === false) {
+      setErro("O Jukebox foi encerrado. O envio de fotos está pausado.");
+      setMostrarTermoFoto(false);
+      setFotoSelecionada(null);
+      setConfirmouMaioridade(false);
+      setAutorizouImagem(false);
+      return;
+    }
+
+    if (!arquivo) {
+      return;
+    }
+
+    if (!confirmouMaioridade || !autorizouImagem) {
+      setErro("Confirme a maioridade e a autorização de uso de imagem.");
+      return;
+    }
+
+    const token = localStorage.getItem("narguileaju_token");
     const clienteId = localStorage.getItem("narguileaju_cliente_id");
 
     if (!token || !clienteId) {
@@ -409,52 +484,17 @@ export default function ClientePage() {
       return;
     }
 
-    // --------------------------------------------------
-    // VALIDA TIPO
-    // --------------------------------------------------
-
-    const tiposPermitidos = ["image/jpeg", "image/png", "image/webp"];
-
-    if (!tiposPermitidos.includes(arquivo.type)) {
-      setErro("Escolha uma imagem JPG, PNG ou WEBP.");
-
-      return;
-    }
-
-    // --------------------------------------------------
-    // LIMITE DE TAMANHO: 10 MB
-    // --------------------------------------------------
-
-    const limiteBytes = 10 * 1024 * 1024;
-
-    if (arquivo.size > limiteBytes) {
-      setErro("A imagem pode ter no máximo 10 MB.");
-
-      return;
-    }
-
     setEnviandoFoto(true);
     setErro("");
     setMensagem("");
 
+    let storagePath = null;
+
     try {
-      // ------------------------------------------------
-      // EXTENSÃO
-      // ------------------------------------------------
-
       const extensao = arquivo.name.split(".").pop()?.toLowerCase() || "jpg";
-
-      // ------------------------------------------------
-      // NOME ÚNICO
-      // ------------------------------------------------
-
       const identificador = crypto.randomUUID();
 
-      const storagePath = `${clienteId}/${Date.now()}-${identificador}.${extensao}`;
-
-      // ------------------------------------------------
-      // UPLOAD
-      // ------------------------------------------------
+      storagePath = `${clienteId}/${Date.now()}-${identificador}.${extensao}`;
 
       const { error: uploadError } = await supabase.storage
         .from("fotos-noite")
@@ -468,10 +508,6 @@ export default function ClientePage() {
         throw uploadError;
       }
 
-      // ------------------------------------------------
-      // URL PÚBLICA
-      // ------------------------------------------------
-
       const { data: publicUrlData } = supabase.storage
         .from("fotos-noite")
         .getPublicUrl(storagePath);
@@ -482,20 +518,14 @@ export default function ClientePage() {
         throw new Error("Não foi possível gerar a URL da foto.");
       }
 
-      // ------------------------------------------------
-      // REGISTRA NO BANCO
-      // ------------------------------------------------
-
       const { data, error } = await supabase.rpc("registrar_foto_cliente", {
         p_token: token,
-
         p_sala_codigo: "NARGUILEAJU",
-
         p_storage_path: storagePath,
-
         p_arquivo_url: arquivoUrl,
-
         p_nome_original: arquivo.name,
+        p_consentimento_imagem: true,
+        p_versao_termo: "1.0",
       });
 
       if (error) {
@@ -509,8 +539,22 @@ export default function ClientePage() {
       }
 
       setMensagem("Foto enviada! Ela aparecerá na TV após aprovação.");
+      setMostrarTermoFoto(false);
+      setFotoSelecionada(null);
+      setConfirmouMaioridade(false);
+      setAutorizouImagem(false);
     } catch (error) {
       console.error("Erro ao enviar foto:", error);
+
+      // Se o arquivo foi enviado ao Storage mas o registro no banco falhou,
+      // tenta remover o arquivo para não deixá-lo órfão.
+      if (storagePath) {
+        try {
+          await supabase.storage.from("fotos-noite").remove([storagePath]);
+        } catch (cleanupError) {
+          console.error("Erro ao limpar foto do Storage:", cleanupError);
+        }
+      }
 
       setErro(error.message || "Não foi possível enviar a foto.");
     } finally {
@@ -589,6 +633,88 @@ export default function ClientePage() {
         className="hidden-photo-input"
       />
 
+      {/* TERMO DE AUTORIZAÇÃO DE USO DE IMAGEM */}
+      {mostrarTermoFoto && (
+        <div className="photo-consent-overlay" role="presentation">
+          <section
+            className="photo-consent-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="photo-consent-title"
+          >
+            <div className="photo-consent-icon">📷</div>
+
+            <span className="photo-consent-eyebrow">ENVIO DE FOTO</span>
+
+            <h2 id="photo-consent-title">Autorização de uso de imagem</h2>
+
+            <p>
+              Autorizo a NarguileAju Hookah Lounge &amp; Store a utilizar esta
+              foto, inclusive minha imagem caso eu apareça nela, para divulgação
+              do estabelecimento em suas redes sociais, site e materiais
+              digitais institucionais e promocionais.
+            </p>
+
+            <p>
+              Declaro que tenho autorização das demais pessoas identificáveis
+              presentes na foto. Estou ciente de que posso solicitar a revogação
+              desta autorização para usos futuros pelos canais de atendimento da
+              NarguileAju.
+            </p>
+
+            <div className="photo-consent-options">
+              <label className="photo-consent-check">
+                <input
+                  type="checkbox"
+                  checked={confirmouMaioridade}
+                  onChange={(event) =>
+                    setConfirmouMaioridade(event.target.checked)
+                  }
+                />
+                <span>Declaro que sou maior de 18 anos.</span>
+              </label>
+
+              <label className="photo-consent-check">
+                <input
+                  type="checkbox"
+                  checked={autorizouImagem}
+                  onChange={(event) => setAutorizouImagem(event.target.checked)}
+                />
+                <span>
+                  Li e autorizo o uso da imagem conforme descrito acima.
+                </span>
+              </label>
+            </div>
+
+            <small className="photo-consent-version">
+              Termo de imagem v1.0
+            </small>
+
+            <div className="photo-consent-actions">
+              <button
+                type="button"
+                className="photo-consent-cancel"
+                onClick={cancelarEnvioFoto}
+                disabled={enviandoFoto || cliente?.jukebox_ativo === false}
+              >
+                Cancelar
+              </button>
+
+              <button
+                type="button"
+                className="photo-consent-confirm"
+                onClick={confirmarEEnviarFoto}
+                disabled={
+                  enviandoFoto || !confirmouMaioridade || !autorizouImagem
+                }
+              >
+                {enviandoFoto ? "Enviando..." : "Autorizar e enviar"}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+
       {/* CABEÇALHO */}
 
       <header className="cliente-header">
@@ -620,6 +746,24 @@ export default function ClientePage() {
 
         {mensagem && <div className="cliente-success">{mensagem}</div>}
 
+        {/* STATUS DA NOITE */}
+
+        {cliente?.jukebox_ativo === false && (
+          <section className="jukebox-closed-card" role="status">
+            <div className="jukebox-closed-icon">🌙</div>
+
+            <div className="jukebox-closed-content">
+              <span className="jukebox-closed-eyebrow">JUKEBOX ENCERRADO</span>
+              <h2>Encerramos por hoje</h2>
+              <p>
+                Os pedidos de músicas, curtidas e envio de fotos estão pausados.
+                A fila da noite continua disponível para consulta.
+              </p>
+              <small>Volte na próxima noite da NarguileAju.</small>
+            </div>
+          </section>
+        )}
+
         {/* LIMITE */}
 
         <section className="music-limit-card">
@@ -638,8 +782,18 @@ export default function ClientePage() {
 
         {/* DISPONIBILIDADE */}
 
-        <section className="availability-message">
-          {(cliente?.restantes ?? 0) > 0 ? (
+        <section
+          className={`availability-message ${
+            cliente?.jukebox_ativo === false ? "availability-closed" : ""
+          }`}
+        >
+          {cliente?.jukebox_ativo === false ? (
+            <>
+              Novas interações estão pausadas.
+              <br />
+              <span>O Jukebox será liberado novamente quando a próxima noite começar.</span>
+            </>
+          ) : (cliente?.restantes ?? 0) > 0 ? (
             <>
               Você pode adicionar <strong>{cliente?.restantes}</strong>
               {cliente?.restantes === 1 ? " música" : " músicas"}.
@@ -661,7 +815,9 @@ export default function ClientePage() {
           type="button"
           className="cliente-action primary-action"
           onClick={escolherMusica}
-          disabled={(cliente?.restantes ?? 0) <= 0}
+          disabled={
+            cliente?.jukebox_ativo === false || (cliente?.restantes ?? 0) <= 0
+          }
         >
           <div className="action-icon">🔎</div>
 
@@ -669,9 +825,11 @@ export default function ClientePage() {
             <strong>Escolher música</strong>
 
             <span>
-              {(cliente?.restantes ?? 0) > 0
-                ? "Busque pelo nome ou artista"
-                : "Seu limite foi atingido"}
+              {cliente?.jukebox_ativo === false
+                ? "Jukebox encerrado por hoje"
+                : (cliente?.restantes ?? 0) > 0
+                  ? "Busque pelo nome ou artista"
+                  : "Seu limite foi atingido"}
             </span>
           </div>
         </button>
@@ -715,6 +873,7 @@ export default function ClientePage() {
                       } ${tocandoAgora.minha_musica ? "own-song" : ""}`}
                       onClick={() => curtirMusica(tocandoAgora)}
                       disabled={
+                        cliente?.jukebox_ativo === false ||
                         tocandoAgora.minha_musica ||
                         tocandoAgora.curtido_por_mim ||
                         curtindoId !== null
@@ -723,8 +882,10 @@ export default function ClientePage() {
                       <span className="like-hand">👍</span>
                       <strong>{tocandoAgora.likes ?? 0}</strong>
                       <span>
-                        {tocandoAgora.minha_musica
-                          ? "Sua música"
+                        {cliente?.jukebox_ativo === false
+                          ? "Pausado"
+                          : tocandoAgora.minha_musica
+                            ? "Sua música"
                           : tocandoAgora.curtido_por_mim
                             ? "Curtido"
                             : curtindoId === tocandoAgora.id
@@ -772,6 +933,7 @@ export default function ClientePage() {
                           }`}
                           onClick={() => curtirMusica(musica)}
                           disabled={
+                            cliente?.jukebox_ativo === false ||
                             musica.minha_musica ||
                             musica.curtido_por_mim ||
                             curtindoId !== null
@@ -780,8 +942,10 @@ export default function ClientePage() {
                           <span className="like-hand">👍</span>
                           <strong>{musica.likes ?? 0}</strong>
                           <span>
-                            {musica.minha_musica
-                              ? "Sua música"
+                            {cliente?.jukebox_ativo === false
+                              ? "Pausado"
+                              : musica.minha_musica
+                                ? "Sua música"
                               : musica.curtido_por_mim
                                 ? "Curtido"
                                 : curtindoId === musica.id
@@ -874,12 +1038,20 @@ export default function ClientePage() {
           <div className="action-icon">{enviandoFoto ? "⏳" : "📷"}</div>
 
           <div>
-            <strong>{enviandoFoto ? "Enviando foto..." : "Enviar foto"}</strong>
+            <strong>
+              {cliente?.jukebox_ativo === false
+                ? "Envio de fotos pausado"
+                : enviandoFoto
+                  ? "Enviando foto..."
+                  : "Enviar foto"}
+            </strong>
 
             <span>
-              {enviandoFoto
-                ? "Aguarde um momento"
-                : "Sua foto pode aparecer na TV"}
+              {cliente?.jukebox_ativo === false
+                ? "Jukebox encerrado por hoje"
+                : enviandoFoto
+                  ? "Aguarde um momento"
+                  : "Sua foto pode aparecer na TV"}
             </span>
           </div>
         </button>

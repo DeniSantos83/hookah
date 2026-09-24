@@ -4040,3 +4040,521 @@ input:focus {
     display: none;
   }
 }
+
+/* ======================================================
+   CLIENTE - TERMO DE AUTORIZAÇÃO DE USO DE IMAGEM
+====================================================== */
+
+.photo-consent-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 22px;
+
+  overflow-y: auto;
+
+  background: rgba(0, 0, 0, 0.82);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.photo-consent-modal {
+  width: 100%;
+  max-width: 520px;
+
+  padding: 28px;
+
+  border: 1px solid rgba(196, 140, 66, 0.42);
+  border-radius: 22px;
+
+  background:
+    radial-gradient(circle at top, rgba(196, 140, 66, 0.12), transparent 35%),
+    #11100e;
+
+  color: #f4ebe2;
+
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.7);
+}
+
+.photo-consent-icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 16px;
+
+  border: 1px solid rgba(196, 140, 66, 0.28);
+  border-radius: 15px;
+
+  background: rgba(196, 140, 66, 0.12);
+
+  font-size: 23px;
+}
+
+.photo-consent-eyebrow {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #c48c42;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 1.8px;
+}
+
+.photo-consent-modal h2 {
+  margin: 0 0 16px;
+
+  color: #f3e7dc;
+
+  font-size: 23px;
+  line-height: 1.2;
+}
+
+.photo-consent-modal > p {
+  margin: 0 0 12px;
+
+  color: #a99a8c;
+
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.photo-consent-options {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.photo-consent-check {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: flex-start;
+
+  gap: 11px;
+
+  padding: 13px 14px;
+
+  border: 1px solid #302923;
+  border-radius: 12px;
+
+  background: #0c0b09;
+
+  color: #d8cabd;
+
+  cursor: pointer;
+}
+
+.photo-consent-check:has(input:checked) {
+  border-color: rgba(196, 140, 66, 0.6);
+  background: rgba(196, 140, 66, 0.08);
+}
+
+.photo-consent-check input {
+  width: 18px;
+  height: 18px;
+
+  margin: 1px 0 0;
+
+  accent-color: #c48c42;
+
+  cursor: pointer;
+}
+
+.photo-consent-check span {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.photo-consent-version {
+  display: block;
+
+  margin-top: 13px;
+
+  color: #625951;
+
+  font-size: 9px;
+
+  text-align: right;
+}
+
+.photo-consent-actions {
+  display: grid;
+  grid-template-columns: 0.8fr 1.5fr;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.photo-consent-actions button {
+  min-height: 46px;
+
+  padding: 11px 14px;
+
+  border-radius: 11px;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+.photo-consent-cancel {
+  border: 1px solid #3a312b;
+
+  background: #171411;
+  color: #a99a8c;
+}
+
+.photo-consent-confirm {
+  border: 1px solid #c48c42;
+
+  background: #c48c42;
+  color: #160f09;
+}
+
+.photo-consent-confirm:disabled {
+  border-color: #302923;
+
+  background: #24201c;
+  color: #665d55;
+
+  cursor: not-allowed;
+}
+
+.photo-consent-cancel:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 520px) {
+  .photo-consent-overlay {
+    align-items: flex-end;
+
+    padding: 12px;
+  }
+
+  .photo-consent-modal {
+    max-height: calc(100dvh - 24px);
+
+    padding: 22px 18px 18px;
+
+    overflow-y: auto;
+
+    border-radius: 20px;
+  }
+
+  .photo-consent-modal h2 {
+    font-size: 20px;
+  }
+
+  .photo-consent-modal > p {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .photo-consent-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-consent-confirm {
+    grid-row: 1;
+  }
+
+  .photo-consent-cancel {
+    grid-row: 2;
+  }
+}
+/* =========================================================
+   ADMIN - CONTROLES DE ORDEM DA FILA
+========================================================= */
+
+.queue-move-button {
+  width: 36px;
+  height: 36px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(196, 140, 66, 0.35);
+  border-radius: 10px;
+
+  background: rgba(196, 140, 66, 0.08);
+  color: #c48c42;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.queue-move-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  background: rgba(196, 140, 66, 0.18);
+  border-color: rgba(196, 140, 66, 0.7);
+}
+
+.queue-top-button {
+  font-size: 20px;
+}
+
+.queue-move-button:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Organiza todos os controles da música */
+.admin-music-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+
+/* ======================================================
+   ADMIN - CONTROLE DA NOITE / JUKEBOX
+====================================================== */
+
+.night-control-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.night-control-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.night-control-card.night-open::before {
+  background: #64a873;
+}
+
+.night-control-card.night-closed::before {
+  background: #ca7777;
+}
+
+.jukebox-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 1px solid #39312b;
+  border-radius: 999px;
+  background: #191613;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.jukebox-status i {
+  width: 8px;
+  height: 8px;
+  display: block;
+  border-radius: 50%;
+}
+
+.jukebox-status.active {
+  border-color: rgba(100, 168, 115, 0.35);
+  color: #8bc497;
+}
+
+.jukebox-status.active i {
+  background: #64a873;
+  box-shadow: 0 0 10px rgba(100, 168, 115, 0.55);
+}
+
+.jukebox-status.closed {
+  border-color: rgba(202, 119, 119, 0.35);
+  color: #ca7777;
+}
+
+.jukebox-status.closed i {
+  background: #ca7777;
+  box-shadow: 0 0 10px rgba(202, 119, 119, 0.45);
+}
+
+.night-control-button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px 18px;
+  border-radius: 11px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease,
+    background 0.18s ease;
+}
+
+.night-control-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.07);
+}
+
+.night-control-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.close-night-button {
+  border: 1px solid rgba(202, 119, 119, 0.4);
+  background: rgba(130, 30, 30, 0.14);
+  color: #e39a9a;
+}
+
+.open-night-button {
+  border: 1px solid rgba(100, 168, 115, 0.4);
+  background: rgba(50, 120, 70, 0.16);
+  color: #9bd0a6;
+}
+
+@media (max-width: 480px) {
+  .night-control-card .admin-card-title {
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .jukebox-status {
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+}
+
+
+/* ======================================================
+   CLIENTE - JUKEBOX ENCERRADO
+====================================================== */
+
+.jukebox-closed-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(196, 140, 66, 0.28);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top right, rgba(196, 140, 66, 0.11), transparent 42%),
+    rgba(24, 20, 17, 0.96);
+}
+
+.jukebox-closed-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #c48c42;
+}
+
+.jukebox-closed-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(196, 140, 66, 0.3);
+  border-radius: 14px;
+  background: rgba(196, 140, 66, 0.08);
+  font-size: 24px;
+}
+
+.jukebox-closed-content {
+  min-width: 0;
+}
+
+.jukebox-closed-eyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: #c48c42;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+}
+
+.jukebox-closed-content h2 {
+  margin: 0 0 7px;
+  font-size: 20px;
+  line-height: 1.15;
+}
+
+.jukebox-closed-content p {
+  margin: 0;
+  opacity: 0.78;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.jukebox-closed-content small {
+  display: block;
+  margin-top: 10px;
+  color: #c48c42;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.availability-message.availability-closed {
+  border-color: rgba(196, 140, 66, 0.22);
+  opacity: 0.86;
+}
+
+.cliente-action:disabled,
+.like-button:disabled {
+  cursor: not-allowed;
+}
+
+.cliente-action:disabled {
+  filter: saturate(0.45);
+  opacity: 0.55;
+}
+
+@media (max-width: 520px) {
+  .jukebox-closed-card {
+    gap: 12px;
+    padding: 17px 15px 17px 18px;
+  }
+
+  .jukebox-closed-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 21px;
+  }
+
+  .jukebox-closed-content h2 {
+    font-size: 18px;
+  }
+}

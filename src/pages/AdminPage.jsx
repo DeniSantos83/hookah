@@ -235,6 +235,29 @@ export default function AdminPage() {
   }
 
   // ======================================================
+  // ABRIR / ENCERRAR JUKEBOX
+  // ======================================================
+
+  function alterarStatusJukebox(ativo) {
+    const acao = ativo ? "abrir" : "encerrar";
+
+    if (
+      !window.confirm(
+        ativo
+          ? "Deseja abrir o Jukebox para os clientes?"
+          : "Deseja encerrar a noite? Novas interações dos clientes serão bloqueadas após concluirmos a proteção das RPCs.",
+      )
+    ) {
+      return;
+    }
+
+    executarAcao("alterar_status_jukebox", {
+      p_sala_codigo: "NARGUILEAJU",
+      p_ativo: ativo,
+    });
+  }
+
+  // ======================================================
   // ALTERAR DURAÇÃO MÁXIMA
   // ======================================================
 
@@ -299,6 +322,18 @@ export default function AdminPage() {
   function proximaMusica() {
     executarAcao("proxima_musica", {
       p_sala_codigo: "NARGUILEAJU",
+    });
+  }
+
+  // ======================================================
+  // REORDENAR FILA
+  // ======================================================
+
+  function moverMusica(id, direcao) {
+    executarAcao("mover_musica_fila", {
+      p_sala_codigo: "NARGUILEAJU",
+      p_musica_id: id,
+      p_direcao: direcao,
     });
   }
 
@@ -533,6 +568,55 @@ export default function AdminPage() {
         {erro && <div className="admin-error">{erro}</div>}
 
         {mensagem && <div className="admin-success">{mensagem}</div>}
+
+        {/* ==================================================
+            CONTROLE DA NOITE
+        ================================================== */}
+
+        <section
+          className={
+            painel?.jukebox_ativo
+              ? "admin-card night-control-card night-open"
+              : "admin-card night-control-card night-closed"
+          }
+        >
+          <div className="admin-card-title">
+            <div>
+              <span>CONTROLE DA NOITE</span>
+              <h2>{painel?.jukebox_ativo ? "Jukebox aberto" : "Jukebox fechado"}</h2>
+            </div>
+
+            <div
+              className={
+                painel?.jukebox_ativo
+                  ? "jukebox-status active"
+                  : "jukebox-status closed"
+              }
+            >
+              <i></i>
+              {painel?.jukebox_ativo ? "ABERTO" : "FECHADO"}
+            </div>
+          </div>
+
+          <p className="limit-description">
+            {painel?.jukebox_ativo
+              ? "O sistema está liberado para os clientes. Use o botão abaixo quando quiser encerrar a noite."
+              : "O Jukebox está marcado como fechado. Use o botão abaixo para iniciar uma nova noite."}
+          </p>
+
+          <button
+            type="button"
+            className={
+              painel?.jukebox_ativo
+                ? "night-control-button close-night-button"
+                : "night-control-button open-night-button"
+            }
+            disabled={processando}
+            onClick={() => alterarStatusJukebox(!painel?.jukebox_ativo)}
+          >
+            {painel?.jukebox_ativo ? "Encerrar noite" : "Abrir Jukebox"}
+          </button>
+        </section>
 
         {/* ==================================================
             LIMITE
@@ -801,6 +885,39 @@ export default function AdminPage() {
                   </div>
 
                   <div className="admin-music-actions">
+                    <button
+                      type="button"
+                      className="queue-move-button queue-top-button"
+                      disabled={processando || index === 0}
+                      onClick={() => moverMusica(musica.id, "topo")}
+                      title="Mover para o topo"
+                      aria-label={`Mover ${musica.titulo} para o topo`}
+                    >
+                      ⇈
+                    </button>
+
+                    <button
+                      type="button"
+                      className="queue-move-button"
+                      disabled={processando || index === 0}
+                      onClick={() => moverMusica(musica.id, "subir")}
+                      title="Subir uma posição"
+                      aria-label={`Subir ${musica.titulo} uma posição`}
+                    >
+                      ↑
+                    </button>
+
+                    <button
+                      type="button"
+                      className="queue-move-button"
+                      disabled={processando || index === fila.length - 1}
+                      onClick={() => moverMusica(musica.id, "descer")}
+                      title="Descer uma posição"
+                      aria-label={`Descer ${musica.titulo} uma posição`}
+                    >
+                      ↓
+                    </button>
+
                     <button
                       type="button"
                       className="play-button"
